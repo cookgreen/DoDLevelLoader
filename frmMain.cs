@@ -14,6 +14,7 @@ namespace DoDLevelLoader
 {
 	public partial class frmMain : Form
 	{
+        private List<DoDLevel> Levels;
 		private const string DOD_LEVEL_DIR = "base/level/";
 		public frmMain()
 		{
@@ -34,6 +35,7 @@ namespace DoDLevelLoader
 
 		private void RefreshLevels()
 		{
+            Levels = new List<DoDLevel>();
 			levelList.Items.Clear();
 			string dodExePath = DoDSetting.DoDPath;
 
@@ -45,6 +47,10 @@ namespace DoDLevelLoader
 			FileInfo fi = new FileInfo(dodExePath);
 			var dodDir = fi.Directory;
 			var dodLevelDir = Path.Combine(dodDir.FullName, DOD_LEVEL_DIR);
+
+            levelList.LargeImageList = new ImageList();
+            levelList.LargeImageList.ImageSize = new Size(128, 72);
+
 			if (Directory.Exists(dodLevelDir))
 			{
 				DirectoryInfo di = new DirectoryInfo(dodLevelDir);
@@ -53,8 +59,17 @@ namespace DoDLevelLoader
 					var foundedHabFiles = subDi.EnumerateFiles().Where(o => o.Extension == ".hab");
 					if (foundedHabFiles.Count() > 0)
 					{
-						ListViewItem lvi = new ListViewItem();
-						lvi.Text = subDi.Name;
+                        string habFile = DOD_LEVEL_DIR + subDi.Name + "/" + foundedHabFiles.First().Name;
+                        string brefingImageFullPath = dodLevelDir + "/" + subDi.Name;
+                        DoDLevel level = new DoDLevel(subDi.Name, habFile, Path.Combine(dodDir.FullName, DOD_LEVEL_DIR), brefingImageFullPath);
+                        Levels.Add(level);
+
+                        levelList.LargeImageList.Images.Add(level.BrefingImage);
+
+                        ListViewItem lvi = new ListViewItem();
+                        lvi.ImageIndex = levelList.LargeImageList.Images.Count - 1;
+
+                        lvi.Text = subDi.Name;
 						lvi.SubItems.Add(DOD_LEVEL_DIR + subDi.Name + "/" + foundedHabFiles.First().Name);
 						levelList.Items.Add(lvi);
 					}
