@@ -65,6 +65,7 @@
 			this.levelList.TabIndex = 0;
 			this.levelList.UseCompatibleStateImageBehavior = false;
 			this.levelList.View = System.Windows.Forms.View.Details;
+			this.levelList.SelectedIndexChanged += new System.EventHandler(this.levelList_SelectedIndexChanged);
 			// 
 			// columnHeader1
 			// 
@@ -88,6 +89,7 @@
 			// 
 			// btnOK
 			// 
+			this.btnOK.Enabled = false;
 			this.btnOK.Location = new System.Drawing.Point(288, 438);
 			this.btnOK.Name = "btnOK";
 			this.btnOK.Size = new System.Drawing.Size(75, 23);
@@ -117,7 +119,7 @@
 			// mnuChangeDoDPath
 			// 
 			this.mnuChangeDoDPath.Name = "mnuChangeDoDPath";
-			this.mnuChangeDoDPath.Size = new System.Drawing.Size(180, 22);
+			this.mnuChangeDoDPath.Size = new System.Drawing.Size(131, 22);
 			this.mnuChangeDoDPath.Text = "DoD Path";
 			this.mnuChangeDoDPath.Click += new System.EventHandler(this.mnuChangeDoDPath_Click);
 			// 
