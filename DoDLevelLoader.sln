@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29905.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoDLevelLoader", "DoDLevelLoader.csproj", "{B4A0180D-FC30-4EF8-AD97-35A8031AF2E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B4A0180D-FC30-4EF8-AD97-35A8031AF2E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4A0180D-FC30-4EF8-AD97-35A8031AF2E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4A0180D-FC30-4EF8-AD97-35A8031AF2E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4A0180D-FC30-4EF8-AD97-35A8031AF2E4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6E003F14-3A1C-4CB9-B448-842ABA9F5032}
+	EndGlobalSection
+EndGlobal
