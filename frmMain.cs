@@ -69,15 +69,13 @@ namespace DoDLevelLoader
 				(new FileInfo(DoDSetting.DoDPath)).Name == "darkestofdays.exe" &&
 				levelList.SelectedIndices.Count == 1)
 			{
-				var lvi = levelList.SelectedItems[levelList.SelectedIndices[0]];
-				string levelRelativePath = lvi.SubItems[0].Text;
+				var lvi = levelList.SelectedItems[0];
+				string levelRelativePath = lvi.SubItems[1].Text;
 
 				Process dodProcess = new Process();
 				dodProcess.StartInfo.FileName = DoDSetting.DoDPath;
 				dodProcess.StartInfo.Arguments = levelRelativePath;
 				dodProcess.Start();
-
-				Hide();
 			}
 			else
 			{
