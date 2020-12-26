@@ -144,7 +144,7 @@ namespace Paloma
     /// <summary>
     /// The top-to-bottom ordering in which pixel data is transferred from the file to the screen.
     /// </summary>
-    public enum VerticalTransferOrder 
+    public enum VerticalTransferOrder
     {
         /// <summary>
         /// Unknown transfer order.
@@ -166,7 +166,7 @@ namespace Paloma
     /// <summary>
     /// The left-to-right ordering in which pixel data is transferred from the file to the screen.
     /// </summary>
-    public enum HorizontalTransferOrder 
+    public enum HorizontalTransferOrder
     {
         /// <summary>
         /// Unknown transfer order.
@@ -188,7 +188,7 @@ namespace Paloma
     /// <summary>
     /// Screen destination of first pixel based on the VerticalTransferOrder and HorizontalTransferOrder.
     /// </summary>
-    public enum FirstPixelDestination 
+    public enum FirstPixelDestination
     {
         /// <summary>
         /// Unknown first pixel destination.
@@ -220,7 +220,7 @@ namespace Paloma
     /// <summary>
     /// The RLE packet type used in a RLE compressed image.
     /// </summary>
-    public enum RLEPacketType 
+    public enum RLEPacketType
     {
         /// <summary>
         /// A raw RLE packet type.
@@ -251,7 +251,7 @@ namespace Paloma
         private int intPadding = 0;
         private GCHandle ImageByteHandle;
         private GCHandle ThumbnailByteHandle;
-                        
+
 
         // Track whether Dispose has been called.
         private bool disposed = false;
@@ -367,12 +367,12 @@ namespace Paloma
         /// <summary>
         /// TargaImage deconstructor.
         /// </summary>
-        ~TargaImage()      
+        ~TargaImage()
         {
-           // Do not re-create Dispose clean-up code here.
-           // Calling Dispose(false) is optimal in terms of
-           // readability and maintainability.
-           Dispose(false);
+            // Do not re-create Dispose clean-up code here.
+            // Calling Dispose(false) is optimal in terms of
+            // readability and maintainability.
+            Dispose(false);
         }
 
 
@@ -412,7 +412,7 @@ namespace Paloma
                             }
                             else
                                 throw new Exception(@"Error loading file, could not read file from disk.");
-                        
+
                         }
 
                     }
@@ -427,7 +427,7 @@ namespace Paloma
             else
                 throw new Exception(@"Error loading file, file '" + strFileName + "' must have an extension of '.tga'.");
 
-            
+
         }
 
 
@@ -462,65 +462,65 @@ namespace Paloma
         private void LoadTGAFooterInfo(BinaryReader binReader)
         {
 
-                if (binReader != null && binReader.BaseStream != null && binReader.BaseStream.Length > 0 && binReader.BaseStream.CanSeek == true)
+            if (binReader != null && binReader.BaseStream != null && binReader.BaseStream.Length > 0 && binReader.BaseStream.CanSeek == true)
+            {
+
+                try
                 {
-                    
-                    try
-                    {            
-                        // set the cursor at the beginning of the signature string.
-                        binReader.BaseStream.Seek((TargaConstants.FooterSignatureOffsetFromEnd * -1), SeekOrigin.End);
+                    // set the cursor at the beginning of the signature string.
+                    binReader.BaseStream.Seek((TargaConstants.FooterSignatureOffsetFromEnd * -1), SeekOrigin.End);
 
-                        // read the signature bytes and convert to ascii string
-                        string Signature = System.Text.Encoding.ASCII.GetString(binReader.ReadBytes(TargaConstants.FooterSignatureByteLength)).TrimEnd('\0');
+                    // read the signature bytes and convert to ascii string
+                    string Signature = System.Text.Encoding.ASCII.GetString(binReader.ReadBytes(TargaConstants.FooterSignatureByteLength)).TrimEnd('\0');
 
-                        // do we have a proper signature
-                        if (string.Compare(Signature, TargaConstants.TargaFooterASCIISignature) == 0)
-                        {
-                            // this is a NEW targa file.
-                            // create the footer
-                            this.eTGAFormat = TGAFormat.NEW_TGA;
-
-                            // set cursor to beginning of footer info
-                            binReader.BaseStream.Seek((TargaConstants.FooterByteLength * -1), SeekOrigin.End);
-
-                            // read the Extension Area Offset value
-                            int ExtOffset = binReader.ReadInt32();
-
-                            // read the Developer Directory Offset value
-                            int DevDirOff = binReader.ReadInt32();
-
-                            // skip the signature we have already read it.
-                            binReader.ReadBytes(TargaConstants.FooterSignatureByteLength);
-
-                            // read the reserved character
-                            string ResChar = System.Text.Encoding.ASCII.GetString(binReader.ReadBytes(TargaConstants.FooterReservedCharByteLength)).TrimEnd('\0');
-
-                            // set all values to our TargaFooter class
-                            this.objTargaFooter.SetExtensionAreaOffset(ExtOffset);
-                            this.objTargaFooter.SetDeveloperDirectoryOffset(DevDirOff);
-                            this.objTargaFooter.SetSignature(Signature);
-                            this.objTargaFooter.SetReservedCharacter(ResChar);
-                        }
-                        else
-                        {
-                            // this is not an ORIGINAL targa file.
-                            this.eTGAFormat = TGAFormat.ORIGINAL_TGA;
-                        }
-                    }
-                    catch ( Exception ex )
+                    // do we have a proper signature
+                    if (string.Compare(Signature, TargaConstants.TargaFooterASCIISignature) == 0)
                     {
-                        // clear all 
-                        this.ClearAll();
-                        throw ex;
+                        // this is a NEW targa file.
+                        // create the footer
+                        this.eTGAFormat = TGAFormat.NEW_TGA;
+
+                        // set cursor to beginning of footer info
+                        binReader.BaseStream.Seek((TargaConstants.FooterByteLength * -1), SeekOrigin.End);
+
+                        // read the Extension Area Offset value
+                        int ExtOffset = binReader.ReadInt32();
+
+                        // read the Developer Directory Offset value
+                        int DevDirOff = binReader.ReadInt32();
+
+                        // skip the signature we have already read it.
+                        binReader.ReadBytes(TargaConstants.FooterSignatureByteLength);
+
+                        // read the reserved character
+                        string ResChar = System.Text.Encoding.ASCII.GetString(binReader.ReadBytes(TargaConstants.FooterReservedCharByteLength)).TrimEnd('\0');
+
+                        // set all values to our TargaFooter class
+                        this.objTargaFooter.SetExtensionAreaOffset(ExtOffset);
+                        this.objTargaFooter.SetDeveloperDirectoryOffset(DevDirOff);
+                        this.objTargaFooter.SetSignature(Signature);
+                        this.objTargaFooter.SetReservedCharacter(ResChar);
+                    }
+                    else
+                    {
+                        // this is not an ORIGINAL targa file.
+                        this.eTGAFormat = TGAFormat.ORIGINAL_TGA;
                     }
                 }
-                else
+                catch (Exception ex)
                 {
+                    // clear all 
                     this.ClearAll();
-                    throw new Exception(@"Error loading file, could not read file from disk.");
+                    throw ex;
                 }
+            }
+            else
+            {
+                this.ClearAll();
+                throw new Exception(@"Error loading file, could not read file from disk.");
+            }
 
-           
+
         }
 
 
@@ -566,7 +566,7 @@ namespace Paloma
                             this.ClearAll();
                             throw new Exception("Targa Image only supports 8, 16, 24, or 32 bit pixel depths.");
                     }
-                    
+
 
                     byte ImageDescriptor = binReader.ReadByte();
                     this.objTargaHeader.SetAttributeBits((byte)Utilities.GetBits(ImageDescriptor, 0, 4));
@@ -593,7 +593,7 @@ namespace Paloma
                 // image types. If color map is included for other file types we can ignore it.
                 if (this.objTargaHeader.ColorMapType == ColorMapType.COLOR_MAP_INCLUDED)
                 {
-                    if (this.objTargaHeader.ImageType == ImageType.UNCOMPRESSED_COLOR_MAPPED || 
+                    if (this.objTargaHeader.ImageType == ImageType.UNCOMPRESSED_COLOR_MAPPED ||
                         this.objTargaHeader.ImageType == ImageType.RUN_LENGTH_ENCODED_COLOR_MAPPED)
                     {
                         if (this.objTargaHeader.ColorMapLength > 0)
@@ -636,7 +636,7 @@ namespace Paloma
                                         default:
                                             this.ClearAll();
                                             throw new Exception("TargaImage only supports ColorMap Entry Sizes of 15, 16, 24 or 32 bits.");
-                                            
+
                                     }
 
 
@@ -648,7 +648,7 @@ namespace Paloma
                                 throw ex;
                             }
 
-                            
+
 
                         }
                         else
@@ -662,7 +662,7 @@ namespace Paloma
                 }
                 else
                 {
-                    if (this.objTargaHeader.ImageType == ImageType.UNCOMPRESSED_COLOR_MAPPED || 
+                    if (this.objTargaHeader.ImageType == ImageType.UNCOMPRESSED_COLOR_MAPPED ||
                         this.objTargaHeader.ImageType == ImageType.RUN_LENGTH_ENCODED_COLOR_MAPPED)
                     {
                         this.ClearAll();
@@ -735,8 +735,8 @@ namespace Paloma
                         // get the version number and letter from file
                         float iVersionNumber = (float)binReader.ReadInt16() / 100.0F;
                         string strVersionLetter = System.Text.Encoding.ASCII.GetString(binReader.ReadBytes(TargaConstants.ExtensionAreaSoftwareVersionLetterByteLength)).TrimEnd('\0');
-                        
-                        
+
+
                         this.objTargaExtensionArea.SetSoftwareID(iVersionNumber.ToString(@"F2") + strVersionLetter);
 
 
@@ -809,7 +809,7 @@ namespace Paloma
             // read the image data into a byte array
             // take into account stride has to be a multiple of 4
             // use padding to make sure multiple of 4    
-        
+
             byte[] data = null;
             if (binReader != null && binReader.BaseStream != null && binReader.BaseStream.Length > 0 && binReader.BaseStream.CanSeek == true)
             {
@@ -823,17 +823,17 @@ namespace Paloma
                     rows = new System.Collections.Generic.List<System.Collections.Generic.List<byte>>();
                     row = new System.Collections.Generic.List<byte>();
 
-                                       
+
                     // seek to the beginning of the image data using the ImageDataOffset value
                     binReader.BaseStream.Seek(this.objTargaHeader.ImageDataOffset, SeekOrigin.Begin);
-                   
-                    
+
+
                     // get the size in bytes of each row in the image
                     int intImageRowByteSize = (int)this.objTargaHeader.Width * ((int)this.objTargaHeader.BytesPerPixel);
 
                     // get the size in bytes of the whole image
                     int intImageByteSize = intImageRowByteSize * (int)this.objTargaHeader.Height;
-                                    
+
                     // is this a RLE compressed image type
                     if (this.objTargaHeader.ImageType == ImageType.RUN_LENGTH_ENCODED_BLACK_AND_WHITE ||
                        this.objTargaHeader.ImageType == ImageType.RUN_LENGTH_ENCODED_COLOR_MAPPED ||
@@ -841,85 +841,85 @@ namespace Paloma
                     {
 
                         #region COMPRESSED
-                        
-                            // RLE Packet info
-                            byte bRLEPacket = 0;
-                            int intRLEPacketType = -1;
-                            int intRLEPixelCount = 0;
-                            byte[] bRunLengthPixel = null;
 
-                            // used to keep track of bytes read
-                            int intImageBytesRead = 0;
-                            int intImageRowBytesRead = 0;
+                        // RLE Packet info
+                        byte bRLEPacket = 0;
+                        int intRLEPacketType = -1;
+                        int intRLEPixelCount = 0;
+                        byte[] bRunLengthPixel = null;
 
-                            // keep reading until we have the all image bytes
-                            while (intImageBytesRead < intImageByteSize)
+                        // used to keep track of bytes read
+                        int intImageBytesRead = 0;
+                        int intImageRowBytesRead = 0;
+
+                        // keep reading until we have the all image bytes
+                        while (intImageBytesRead < intImageByteSize)
+                        {
+                            // get the RLE packet
+                            bRLEPacket = binReader.ReadByte();
+                            intRLEPacketType = Utilities.GetBits(bRLEPacket, 7, 1);
+                            intRLEPixelCount = Utilities.GetBits(bRLEPacket, 0, 7) + 1;
+
+                            // check the RLE packet type
+                            if ((RLEPacketType)intRLEPacketType == RLEPacketType.RUN_LENGTH)
                             {
-                                // get the RLE packet
-                                bRLEPacket = binReader.ReadByte();
-                                intRLEPacketType = Utilities.GetBits(bRLEPacket, 7, 1);
-                                intRLEPixelCount = Utilities.GetBits(bRLEPacket, 0, 7) + 1;
+                                // get the pixel color data
+                                bRunLengthPixel = binReader.ReadBytes((int)this.objTargaHeader.BytesPerPixel);
 
-                                // check the RLE packet type
-                                if ((RLEPacketType)intRLEPacketType == RLEPacketType.RUN_LENGTH)
+                                // add the number of pixels specified using the read pixel color
+                                for (int i = 0; i < intRLEPixelCount; i++)
                                 {
-                                    // get the pixel color data
-                                    bRunLengthPixel = binReader.ReadBytes((int)this.objTargaHeader.BytesPerPixel);
+                                    foreach (byte b in bRunLengthPixel)
+                                        row.Add(b);
 
-                                    // add the number of pixels specified using the read pixel color
-                                    for (int i = 0; i < intRLEPixelCount; i++)
+                                    // increment the byte counts
+                                    intImageRowBytesRead += bRunLengthPixel.Length;
+                                    intImageBytesRead += bRunLengthPixel.Length;
+
+                                    // if we have read a full image row
+                                    // add the row to the row list and clear it
+                                    // restart row byte count
+                                    if (intImageRowBytesRead == intImageRowByteSize)
                                     {
-                                        foreach (byte b in bRunLengthPixel)
-                                            row.Add(b);
-
-                                        // increment the byte counts
-                                        intImageRowBytesRead += bRunLengthPixel.Length;
-                                        intImageBytesRead += bRunLengthPixel.Length;
-
-                                        // if we have read a full image row
-                                        // add the row to the row list and clear it
-                                        // restart row byte count
-                                        if (intImageRowBytesRead == intImageRowByteSize)
-                                        {
-                                            rows.Add(row);
-                                            row = null;
-                                            row = new System.Collections.Generic.List<byte>();
-                                            intImageRowBytesRead = 0;
-                                            
-                                        }
-                                    }
-
-                                }
-
-                                else if ((RLEPacketType)intRLEPacketType == RLEPacketType.RAW)
-                                {
-                                    // get the number of bytes to read based on the read pixel count
-                                    int intBytesToRead = intRLEPixelCount * (int)this.objTargaHeader.BytesPerPixel;
-
-                                    // read each byte
-                                    for (int i = 0;i < intBytesToRead;i++)
-                                    {
-                                        row.Add(binReader.ReadByte());
-
-                                        // increment the byte counts
-                                        intImageBytesRead++;
-                                        intImageRowBytesRead++;
-
-                                        // if we have read a full image row
-                                        // add the row to the row list and clear it
-                                        // restart row byte count
-                                        if (intImageRowBytesRead == intImageRowByteSize)
-                                        {
-                                            rows.Add(row);
-                                            row = null;
-                                            row = new System.Collections.Generic.List<byte>();
-                                            intImageRowBytesRead = 0;
-                                        }
+                                        rows.Add(row);
+                                        row = null;
+                                        row = new System.Collections.Generic.List<byte>();
+                                        intImageRowBytesRead = 0;
 
                                     }
-
                                 }
+
                             }
+
+                            else if ((RLEPacketType)intRLEPacketType == RLEPacketType.RAW)
+                            {
+                                // get the number of bytes to read based on the read pixel count
+                                int intBytesToRead = intRLEPixelCount * (int)this.objTargaHeader.BytesPerPixel;
+
+                                // read each byte
+                                for (int i = 0; i < intBytesToRead; i++)
+                                {
+                                    row.Add(binReader.ReadByte());
+
+                                    // increment the byte counts
+                                    intImageBytesRead++;
+                                    intImageRowBytesRead++;
+
+                                    // if we have read a full image row
+                                    // add the row to the row list and clear it
+                                    // restart row byte count
+                                    if (intImageRowBytesRead == intImageRowByteSize)
+                                    {
+                                        rows.Add(row);
+                                        row = null;
+                                        row = new System.Collections.Generic.List<byte>();
+                                        intImageRowBytesRead = 0;
+                                    }
+
+                                }
+
+                            }
+                        }
 
                         #endregion
 
@@ -940,13 +940,13 @@ namespace Paloma
                             }
 
                             // add row to the list of rows
-                            rows.Add(row);                            
+                            rows.Add(row);
                             // create a new row
                             row = null;
                             row = new System.Collections.Generic.List<byte>();
                         }
 
-                        
+
                         #endregion
                     }
 
@@ -1007,14 +1007,15 @@ namespace Paloma
                             msData.Write(padding, 0, padding.Length);
                         }
                         // get the image byte array
-                        data = msData.ToArray(); 
-                        
+                        data = msData.ToArray();
+
                     }
 
                     // clear our row arrays
                     if (rows != null)
                     {
-                        for(int i =0; i<rows.Count;i++){                            
+                        for (int i = 0; i < rows.Count; i++)
+                        {
                             rows[i].Clear();
                             rows[i] = null;
                         }
@@ -1129,8 +1130,8 @@ namespace Paloma
                             forceopaque = true;
                     }
                     else if (this.Header.AttributeBits == 0 || this.Header.AttributeBits == 1)
-                            forceopaque = true;
-                    
+                        forceopaque = true;
+
                     if (forceopaque)
                         // use 255 for alpha ( 255 = opaque/visible ) so we can see the image
                         pal.Entries[i] = Color.FromArgb(255, this.objTargaHeader.ColorMap[i].R, this.objTargaHeader.ColorMap[i].G, this.objTargaHeader.ColorMap[i].B);
@@ -1179,12 +1180,12 @@ namespace Paloma
                     }
                     pal = null;
                 }
-                
+
 
             }
 
 
-            
+
         }
 
         /// <summary>
@@ -1193,7 +1194,7 @@ namespace Paloma
         /// <returns></returns>
         private PixelFormat GetPixelFormat()
         {
-            
+
             PixelFormat pfTargaPixelFormat = PixelFormat.Undefined;
 
             // first off what is our Pixel Depth (bits per pixel)
@@ -1202,7 +1203,7 @@ namespace Paloma
                 case 8:
                     pfTargaPixelFormat = PixelFormat.Format8bppIndexed;
                     break;
-            
+
                 case 16:
                     // if this is a new tga file and we have an extension area, we'll determine the alpha based on 
                     // the extension area Attributes 
@@ -1272,17 +1273,17 @@ namespace Paloma
                         break;
                     }
 
-                    
-                    
+
+
                     break;
-                
+
             }
 
 
             return pfTargaPixelFormat;
         }
 
-        
+
         /// <summary>
         /// Loads the thumbnail of the loaded image file, if any.
         /// </summary>
@@ -1321,7 +1322,7 @@ namespace Paloma
                     bool blnEachRowReverse = false;
                     bool blnRowsReverse = false;
 
-                    
+
                     using (msData = new MemoryStream())
                     {
                         // get the size in bytes of each row in the image
@@ -1341,7 +1342,7 @@ namespace Paloma
                             row = null;
                             row = new System.Collections.Generic.List<byte>();
                         }
-                        
+
                         switch (this.objTargaHeader.FirstPixelDestination)
                         {
                             case FirstPixelDestination.TOP_LEFT:
@@ -1456,9 +1457,9 @@ namespace Paloma
             this.objTargaFooter = new TargaFooter();
             this.eTGAFormat = TGAFormat.UNKNOWN;
             this.intStride = 0;
-            this.intPadding = 0;            
+            this.intPadding = 0;
             this.strFileName = string.Empty;
-        
+
         }
 
         /// <summary>
@@ -1558,7 +1559,7 @@ namespace Paloma
                         {
                             this.ImageByteHandle.Free();
                         }
-                       
+
                     }
 
                     if (this.ThumbnailByteHandle != null)
@@ -1628,7 +1629,7 @@ namespace Paloma
         private byte bAttributeBits = 0;
         private string strImageIDValue = string.Empty;
         private System.Collections.Generic.List<System.Drawing.Color> cColorMap = new List<System.Drawing.Color>();
-        
+
         /// <summary>
         /// Gets the number of bytes contained the ImageIDValue property. The maximum
         /// number of characters is 255. A value of zero indicates that no ImageIDValue is included with the
@@ -1842,20 +1843,20 @@ namespace Paloma
         /// </summary>
         public FirstPixelDestination FirstPixelDestination
         {
-            get 
+            get
             {
 
                 if (this.eVerticalTransferOrder == VerticalTransferOrder.UNKNOWN || this.eHorizontalTransferOrder == HorizontalTransferOrder.UNKNOWN)
-                     return FirstPixelDestination.UNKNOWN; 
+                    return FirstPixelDestination.UNKNOWN;
                 else if (this.eVerticalTransferOrder == VerticalTransferOrder.BOTTOM && this.eHorizontalTransferOrder == HorizontalTransferOrder.LEFT)
                     return FirstPixelDestination.BOTTOM_LEFT;
                 else if (this.eVerticalTransferOrder == VerticalTransferOrder.BOTTOM && this.eHorizontalTransferOrder == HorizontalTransferOrder.RIGHT)
                     return FirstPixelDestination.BOTTOM_RIGHT;
                 else if (this.eVerticalTransferOrder == VerticalTransferOrder.TOP && this.eHorizontalTransferOrder == HorizontalTransferOrder.LEFT)
                     return FirstPixelDestination.TOP_LEFT;
-                else 
+                else
                     return FirstPixelDestination.TOP_RIGHT;
-               
+
             }
         }
 
@@ -1942,7 +1943,7 @@ namespace Paloma
         /// </summary>
         public int ImageDataOffset
         {
-            get 
+            get
             {
                 // calculate the image data offset
 
@@ -1974,7 +1975,7 @@ namespace Paloma
                 intImageDataOffset += ((int)this.sColorMapLength * (int)Bytes);
 
                 // return result
-                return intImageDataOffset; 
+                return intImageDataOffset;
             }
         }
 
@@ -2000,7 +2001,7 @@ namespace Paloma
         private int intDeveloperDirectoryOffset = 0;
         private string strSignature = string.Empty;
         private string strReservedCharacter = string.Empty;
-        
+
         /// <summary>
         /// Gets the offset from the beginning of the file to the start of the Extension Area. 
         /// If the ExtensionAreaOffset is zero, no Extension Area exists in the file.
@@ -2078,8 +2079,8 @@ namespace Paloma
         /// Creates a new instance of the TargaFooter class.
         /// </summary>
         public TargaFooter()
-        {}
-        
+        { }
+
 
     }
 
@@ -2303,14 +2304,14 @@ namespace Paloma
         /// </summary>
         public float PixelAspectRatio
         {
-            get 
+            get
             {
                 if (this.intPixelAspectRatioDenominator > 0)
                 {
                     return (float)this.intPixelAspectRatioNumerator / (float)this.intPixelAspectRatioDenominator;
                 }
                 else
-                    return 0.0F; 
+                    return 0.0F;
             }
         }
 
@@ -2459,7 +2460,7 @@ namespace Paloma
         }
 
     }
-    
+
 
     /// <summary>
     /// Utilities functions used by the TargaImage class.
