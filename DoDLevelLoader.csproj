@@ -68,7 +68,13 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.zh-Hans.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPathSelector.resx">
+      <DependentUpon>frmPathSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPathSelector.zh-Hans.resx">
       <DependentUpon>frmPathSelector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

@@ -16,11 +16,46 @@ namespace DoDLevelLoader
     {
         private List<DoDLevel> Levels;
         private const string DOD_LEVEL_DIR = "base/level/";
+        private BackgroundWorker worker;
+        private delegate void ListViewAddItemDelegate(ListView lsv, ListViewItem item);
+        private delegate void ListViewAddImageDelegate(ListView lsv, Image image);
+        private ListViewAddItemDelegate listViewAddItemDelegate;
+        private ListViewAddImageDelegate listViewAddImageDelegate;
+
         public frmMain()
         {
             InitializeComponent();
+
+            listViewAddItemDelegate = new ListViewAddItemDelegate(ListViewAddItemMethod);
+            listViewAddImageDelegate = new ListViewAddImageDelegate(ListViewAddImageMethod);
+
             RefreshLevels();
         }
+
+        private void ListViewAddItemMethod(ListView lsv, ListViewItem item)
+        {
+            if (lsv.InvokeRequired)
+            {
+                lsv.Invoke(listViewAddItemDelegate, lsv, item);
+            }
+            else
+            {
+                lsv.Items.Add(item);
+            }
+        }
+
+        private void ListViewAddImageMethod(ListView lsv, Image image)
+        {
+            if (lsv.InvokeRequired)
+            {
+                lsv.Invoke(listViewAddImageDelegate, lsv, image);
+            }
+            else
+            {
+                lsv.LargeImageList.Images.Add(image);
+            }
+        }
+
 
         private void mnuChangeDoDPath_Click(object sender, EventArgs e)
         {
@@ -28,15 +63,32 @@ namespace DoDLevelLoader
             if (pathSelectorWin.ShowDialog() == DialogResult.OK)
             {
                 DoDSetting.DoDPath = pathSelectorWin.SelectedPath;
-                DoDSetting.SaveTo(Path.Combine(Environment.CurrentDirectory, "setting.ini"));
+                DoDSetting.SaveTo(Path.Combine(Environment.CurrentDirectory, "setting.ini").Replace("\\", "/"));
                 RefreshLevels();
             }
         }
 
         private void RefreshLevels()
         {
-            Levels = new List<DoDLevel>();
             levelList.Items.Clear();
+
+            levelList.LargeImageList = new ImageList();
+            levelList.LargeImageList.ImageSize = new Size(128, 72);
+            btnOK.Enabled = false;
+
+            worker = new BackgroundWorker();
+            worker.DoWork += Worker_DoWork;
+            worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+            worker.RunWorkerAsync();
+        }
+
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+        }
+
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Levels = new List<DoDLevel>();
             string dodExePath = DoDSetting.DoDPath;
 
             if (string.IsNullOrEmpty(dodExePath))
@@ -47,9 +99,6 @@ namespace DoDLevelLoader
             FileInfo fi = new FileInfo(dodExePath);
             var dodDir = fi.Directory;
             var dodLevelDir = Path.Combine(dodDir.FullName, DOD_LEVEL_DIR);
-
-            levelList.LargeImageList = new ImageList();
-            levelList.LargeImageList.ImageSize = new Size(128, 72);
 
             if (Directory.Exists(dodLevelDir))
             {
@@ -64,14 +113,15 @@ namespace DoDLevelLoader
                         DoDLevel level = new DoDLevel(subDi.Name, habFile, Path.Combine(dodDir.FullName, DOD_LEVEL_DIR), brefingImageFullPath);
                         Levels.Add(level);
 
-                        levelList.LargeImageList.Images.Add(level.BrefingImage);
+                        ListViewAddImageMethod(levelList, level.BrefingImage);
 
                         ListViewItem lvi = new ListViewItem();
                         lvi.ImageIndex = levelList.LargeImageList.Images.Count - 1;
 
                         lvi.Text = subDi.Name;
                         lvi.SubItems.Add(DOD_LEVEL_DIR + subDi.Name + "/" + foundedHabFiles.First().Name);
-                        levelList.Items.Add(lvi);
+
+                        ListViewAddItemMethod(levelList, lvi);
                     }
                 }
             }
