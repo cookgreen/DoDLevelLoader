@@ -108,20 +108,24 @@ namespace DoDLevelLoader
                     var foundedHabFiles = subDi.EnumerateFiles().Where(o => o.Extension == ".hab");
                     if (foundedHabFiles.Count() > 0)
                     {
-                        string habFile = DOD_LEVEL_DIR + subDi.Name + "/" + foundedHabFiles.First().Name;
-                        string brefingImageFullPath = dodLevelDir + "/" + subDi.Name;
-                        DoDLevel level = new DoDLevel(subDi.Name, habFile, Path.Combine(dodDir.FullName, DOD_LEVEL_DIR), brefingImageFullPath);
-                        Levels.Add(level);
+                        foreach (var habFile in foundedHabFiles)
+                        {
+                            string habFileName = DOD_LEVEL_DIR + subDi.Name + "/" + habFile.Name;
+                            string brefingImageFullPath = dodLevelDir + "/" + subDi.Name;
+                            DoDLevel level = new DoDLevel(subDi.Name, habFileName, Path.Combine(dodDir.FullName, DOD_LEVEL_DIR), brefingImageFullPath);
+                            Levels.Add(level);
 
-                        ListViewAddImageMethod(levelList, level.BrefingImage);
+                            ListViewAddImageMethod(levelList, level.BrefingImage);
 
-                        ListViewItem lvi = new ListViewItem();
-                        lvi.ImageIndex = levelList.LargeImageList.Images.Count - 1;
+                            ListViewItem lvi = new ListViewItem();
+                            lvi.ImageIndex = levelList.LargeImageList.Images.Count - 1;
 
-                        lvi.Text = subDi.Name;
-                        lvi.SubItems.Add(DOD_LEVEL_DIR + subDi.Name + "/" + foundedHabFiles.First().Name);
+                            var habFileNameWithExtension = Path.GetFileNameWithoutExtension(habFileName);
+                            lvi.Text = habFileNameWithExtension;
+                            lvi.SubItems.Add(DOD_LEVEL_DIR + subDi.Name + "/" + foundedHabFiles.First().Name);
 
-                        ListViewAddItemMethod(levelList, lvi);
+                            ListViewAddItemMethod(levelList, lvi);
+                        }
                     }
                 }
             }
