@@ -122,7 +122,7 @@ namespace DoDLevelLoader
 
                             var habFileNameWithExtension = Path.GetFileNameWithoutExtension(habFileName);
                             lvi.Text = habFileNameWithExtension;
-                            lvi.SubItems.Add(DOD_LEVEL_DIR + subDi.Name + "/" + foundedHabFiles.First().Name);
+                            lvi.SubItems.Add(habFileName);
 
                             ListViewAddItemMethod(levelList, lvi);
                         }
