@@ -45,19 +45,20 @@
             // 
             // groupBox1
             // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.levelList);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
             // levelList
             // 
-            resources.ApplyResources(this.levelList, "levelList");
             this.levelList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
             this.levelList.FullRowSelect = true;
             this.levelList.GridLines = true;
+            this.levelList.HideSelection = false;
+            resources.ApplyResources(this.levelList, "levelList");
             this.levelList.Name = "levelList";
             this.levelList.UseCompatibleStateImageBehavior = false;
             this.levelList.SelectedIndexChanged += new System.EventHandler(this.levelList_SelectedIndexChanged);
@@ -86,22 +87,23 @@
             // 
             // menuStrip1
             // 
-            resources.ApplyResources(this.menuStrip1, "menuStrip1");
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem});
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
-            resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuChangeDoDPath});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
             // 
             // mnuChangeDoDPath
             // 
-            resources.ApplyResources(this.mnuChangeDoDPath, "mnuChangeDoDPath");
             this.mnuChangeDoDPath.Name = "mnuChangeDoDPath";
+            resources.ApplyResources(this.mnuChangeDoDPath, "mnuChangeDoDPath");
             this.mnuChangeDoDPath.Click += new System.EventHandler(this.mnuChangeDoDPath_Click);
             // 
             // frmMain
@@ -118,6 +120,7 @@
             this.MinimizeBox = false;
             this.Name = "frmMain";
             this.ShowIcon = false;
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.groupBox1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

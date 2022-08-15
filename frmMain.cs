@@ -28,8 +28,22 @@ namespace DoDLevelLoader
 
             listViewAddItemDelegate = new ListViewAddItemDelegate(ListViewAddItemMethod);
             listViewAddImageDelegate = new ListViewAddImageDelegate(ListViewAddImageMethod);
+        }
 
-            RefreshLevels();
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            if (!DoDExtension.CheckDoDPath(DoDSetting.DoDPath))
+            {
+                frmPathSelector pathSelectorWin = new frmPathSelector();
+                if (pathSelectorWin.ShowDialog() == DialogResult.Cancel)
+                {
+                    Close();
+                }
+            }
+            else
+            {
+                RefreshLevels();
+            }
         }
 
         private void ListViewAddItemMethod(ListView lsv, ListViewItem item)
@@ -91,7 +105,7 @@ namespace DoDLevelLoader
             Levels = new List<DoDLevel>();
             string dodExePath = DoDSetting.DoDPath;
 
-            if (string.IsNullOrEmpty(dodExePath))
+            if (!DoDExtension.CheckDoDPath(dodExePath))
             {
                 return;
             }

@@ -2,6 +2,6 @@
 *.exe.config
 *.pdb
 *.dll
+bin/*
 obj/*
 .vs/*
-setting.ini
