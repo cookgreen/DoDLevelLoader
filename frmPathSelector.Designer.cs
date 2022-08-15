@@ -46,6 +46,7 @@
             resources.ApplyResources(this.txtPath, "txtPath");
             this.txtPath.Name = "txtPath";
             this.txtPath.ReadOnly = true;
+            this.txtPath.TextChanged += new System.EventHandler(this.txtPath_TextChanged);
             // 
             // btnCancel
             // 

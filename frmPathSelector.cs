@@ -51,5 +51,13 @@ namespace DoDLevelLoader
 				txtPath.Text = SelectedPath;
 			}
 		}
-	}
+
+        private void txtPath_TextChanged(object sender, EventArgs e)
+        {
+			if(!File.Exists(txtPath.Text))
+            {
+				txtPath.Text = string.Empty;
+            }
+        }
+    }
 }
