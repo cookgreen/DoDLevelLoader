@@ -1,6 +1,6 @@
 ﻿namespace DoDLevelLoader
 {
-	partial class frmPathSelector
+	partial class frmDoDoPathSelector
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -28,7 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPathSelector));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDoDoPathSelector));
             this.label1 = new System.Windows.Forms.Label();
             this.txtPath = new System.Windows.Forms.TextBox();
             this.btnCancel = new System.Windows.Forms.Button();

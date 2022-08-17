@@ -16,9 +16,11 @@ namespace DoDLevelLoader
         static void Main()
         {
             DoDSetting.Read(Path.Combine(Environment.CurrentDirectory, "setting.ini"));
+            frmDoDLoader dodLoaderWin = new frmDoDLoader();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
+            Application.Run(dodLoaderWin);
         }
     }
 }

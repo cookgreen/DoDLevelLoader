@@ -1,6 +1,6 @@
 ﻿namespace DoDLevelLoader
 {
-	partial class frmMain
+	partial class frmDoDLoader
 	{
 		/// <summary>
 		/// 必需的设计器变量。
@@ -28,7 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDoDLoader));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.levelList = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));

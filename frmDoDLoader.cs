@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace DoDLevelLoader
 {
-    public partial class frmMain : Form
+    public partial class frmDoDLoader : Form
     {
         private List<DoDLevel> Levels;
         private const string DOD_LEVEL_DIR = "base/level/";
@@ -22,7 +22,7 @@ namespace DoDLevelLoader
         private ListViewAddItemDelegate listViewAddItemDelegate;
         private ListViewAddImageDelegate listViewAddImageDelegate;
 
-        public frmMain()
+        public frmDoDLoader()
         {
             InitializeComponent();
 
@@ -34,7 +34,7 @@ namespace DoDLevelLoader
         {
             if (!DoDExtension.CheckDoDPath(DoDSetting.DoDPath))
             {
-                frmPathSelector pathSelectorWin = new frmPathSelector();
+                frmDoDoPathSelector pathSelectorWin = new frmDoDoPathSelector();
                 if (pathSelectorWin.ShowDialog() == DialogResult.Cancel)
                 {
                     Close();
@@ -73,7 +73,7 @@ namespace DoDLevelLoader
 
         private void mnuChangeDoDPath_Click(object sender, EventArgs e)
         {
-            frmPathSelector pathSelectorWin = new frmPathSelector();
+            frmDoDoPathSelector pathSelectorWin = new frmDoDoPathSelector();
             if (pathSelectorWin.ShowDialog() == DialogResult.OK)
             {
                 DoDSetting.DoDPath = pathSelectorWin.SelectedPath;

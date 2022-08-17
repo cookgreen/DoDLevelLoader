@@ -14,6 +14,7 @@ namespace DoDLevelLoader
         private string name;
         private string habRelativePath;
         private Bitmap brefingImage;
+
         public string Name { get { return name; } }
         public string HabRelativePath { get { return habRelativePath; } }
         public Bitmap BrefingImage { get { return brefingImage; } }

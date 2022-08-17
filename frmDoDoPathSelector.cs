@@ -11,11 +11,11 @@ using System.Windows.Forms;
 
 namespace DoDLevelLoader
 {
-	public partial class frmPathSelector : Form
+	public partial class frmDoDoPathSelector : Form
 	{
 		public string SelectedPath { get; set; }
 
-		public frmPathSelector()
+		public frmDoDoPathSelector()
 		{
 			InitializeComponent();
 			txtPath.Text = DoDSetting.DoDPath;

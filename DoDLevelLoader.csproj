@@ -52,32 +52,32 @@
     <Compile Include="DoDExtension.cs" />
     <Compile Include="DoDLevel.cs" />
     <Compile Include="DoDSetting.cs" />
-    <Compile Include="frmMain.cs">
+    <Compile Include="frmDoDLoader.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMain.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <Compile Include="frmDoDLoader.Designer.cs">
+      <DependentUpon>frmDoDLoader.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPathSelector.cs">
+    <Compile Include="frmDoDoPathSelector.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPathSelector.Designer.cs">
-      <DependentUpon>frmPathSelector.cs</DependentUpon>
+    <Compile Include="frmDoDoPathSelector.Designer.cs">
+      <DependentUpon>frmDoDoPathSelector.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TargaImage.cs" />
-    <EmbeddedResource Include="frmMain.resx">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <EmbeddedResource Include="frmDoDLoader.resx">
+      <DependentUpon>frmDoDLoader.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMain.zh-Hans.resx">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <EmbeddedResource Include="frmDoDLoader.zh-Hans.resx">
+      <DependentUpon>frmDoDLoader.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPathSelector.resx">
-      <DependentUpon>frmPathSelector.cs</DependentUpon>
+    <EmbeddedResource Include="frmDoDoPathSelector.resx">
+      <DependentUpon>frmDoDoPathSelector.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPathSelector.zh-Hans.resx">
-      <DependentUpon>frmPathSelector.cs</DependentUpon>
+    <EmbeddedResource Include="frmDoDoPathSelector.zh-Hans.resx">
+      <DependentUpon>frmDoDoPathSelector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
