@@ -59,6 +59,7 @@
             this.levelList.GridLines = true;
             this.levelList.HideSelection = false;
             resources.ApplyResources(this.levelList, "levelList");
+            this.levelList.MultiSelect = false;
             this.levelList.Name = "levelList";
             this.levelList.UseCompatibleStateImageBehavior = false;
             this.levelList.SelectedIndexChanged += new System.EventHandler(this.levelList_SelectedIndexChanged);
@@ -106,7 +107,7 @@
             resources.ApplyResources(this.mnuChangeDoDPath, "mnuChangeDoDPath");
             this.mnuChangeDoDPath.Click += new System.EventHandler(this.mnuChangeDoDPath_Click);
             // 
-            // frmMain
+            // frmDoDLoader
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -118,7 +119,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmMain";
+            this.Name = "frmDoDLoader";
             this.ShowIcon = false;
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.groupBox1.ResumeLayout(false);

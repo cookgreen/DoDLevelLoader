@@ -187,9 +187,13 @@ namespace DoDLevelLoader
 
         private void levelList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (levelList.SelectedIndices.Count > 0)
+            if (levelList.SelectedIndices.Count == 1)
             {
                 btnOK.Enabled = true;
+            }
+            else
+            {
+                btnOK.Enabled = false;
             }
         }
     }
