@@ -49,34 +49,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DoDExtension.cs" />
-    <Compile Include="DoDLevel.cs" />
-    <Compile Include="DoDSetting.cs" />
-    <Compile Include="frmDoDLoader.cs">
+    <Compile Include="Utility\DoDExtension.cs" />
+    <Compile Include="Models\DoDLevel.cs" />
+    <Compile Include="Models\DoDSetting.cs" />
+    <Compile Include="Forms\frmDoDLoader.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmDoDLoader.Designer.cs">
+    <Compile Include="Forms\frmDoDLoader.Designer.cs">
       <DependentUpon>frmDoDLoader.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmDoDoPathSelector.cs">
+    <Compile Include="Forms\frmDoDoPathSelector.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmDoDoPathSelector.Designer.cs">
+    <Compile Include="Forms\frmDoDoPathSelector.Designer.cs">
       <DependentUpon>frmDoDoPathSelector.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TargaImage.cs" />
-    <EmbeddedResource Include="frmDoDLoader.resx">
+    <Compile Include="Utility\TargaImage.cs" />
+    <EmbeddedResource Include="Forms\frmDoDLoader.resx">
       <DependentUpon>frmDoDLoader.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmDoDLoader.zh-Hans.resx">
+    <EmbeddedResource Include="Forms\frmDoDLoader.zh-Hans.resx">
       <DependentUpon>frmDoDLoader.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmDoDoPathSelector.resx">
+    <EmbeddedResource Include="Forms\frmDoDoPathSelector.resx">
       <DependentUpon>frmDoDoPathSelector.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmDoDoPathSelector.zh-Hans.resx">
+    <EmbeddedResource Include="Forms\frmDoDoPathSelector.zh-Hans.resx">
       <DependentUpon>frmDoDoPathSelector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

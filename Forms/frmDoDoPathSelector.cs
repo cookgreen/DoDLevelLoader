@@ -8,8 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DoDLevelLoader.Models;
 
-namespace DoDLevelLoader
+namespace DoDLevelLoader.Forms
 {
 	public partial class frmDoDoPathSelector : Form
 	{

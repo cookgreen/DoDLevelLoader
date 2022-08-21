@@ -1,4 +1,4 @@
-﻿namespace DoDLevelLoader
+﻿namespace DoDLevelLoader.Forms
 {
 	partial class frmDoDoPathSelector
 	{
